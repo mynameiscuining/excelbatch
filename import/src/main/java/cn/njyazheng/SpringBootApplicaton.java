@@ -1,6 +1,6 @@
-package cn;
+package cn.njyazheng;
 
-import cn.njyzheng.excel.read.ExcelRead;
+import cn.njyazheng.excel.read.ExcelRead;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

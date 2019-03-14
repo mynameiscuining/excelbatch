@@ -1,4 +1,4 @@
-package cn.cn.njyazheng.service;
+package cn.njyazheng.service;
 
 import cn.njyazheng.dao.IUserinfoDao;
 import cn.njyazheng.domain.IUserinfo;

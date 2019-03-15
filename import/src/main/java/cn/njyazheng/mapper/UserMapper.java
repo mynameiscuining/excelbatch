@@ -1,6 +1,9 @@
 package cn.njyazheng.mapper;
 
 import cn.njyazheng.domain.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(String loginaccount);
@@ -14,4 +17,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    void insertBatch(@Param("userList") List<User> userList);
 }

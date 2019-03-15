@@ -1,5 +1,6 @@
 package cn.njyazheng.excel.read;
 
+import cn.njyazheng.domain.User;
 import cn.njyazheng.service.ExcelService;
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelReader;
@@ -10,6 +11,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Component
 public class ExcelRead {
@@ -40,10 +44,38 @@ public class ExcelRead {
 
     public void insert(){
         try {
-
-//            if(excelService.addBatch(userinfos).get()){
-//                System.out.println("ooooooooooooooooooooooooooooooooooooooooo");
-//            };
+            List<User> userList=new ArrayList<>();
+            User user=new User();
+            user.setAddress("1");
+            user.setCertificate("1");
+            user.setCerttype(1);
+            user.setCreateoperator("1");
+            user.setCreatetime(new Date());
+            user.setEmail("1");
+            user.setLanguagepref(1);
+            user.setLoginaccount("1");
+            user.setModifyoperator("1");
+            user.setModifytime(new Date());
+            user.setPhonenum("1");
+            user.setUsername("1");
+            userList.add(user);
+            user=new User();
+            user.setAddress("2");
+            user.setCertificate("2");
+            user.setCerttype(2);
+            user.setCreateoperator("2");
+            user.setCreatetime(new Date());
+            user.setEmail("2");
+            user.setLanguagepref(2);
+            user.setLoginaccount("2");
+            user.setModifyoperator("2");
+            user.setModifytime(new Date());
+            user.setPhonenum("2");
+            user.setUsername("2");
+            userList.add(user);
+            if(excelService.addBatch(userList).get()){
+                System.out.println("ooooooooooooooooooooooooooooooooooooooooo");
+            };
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -29,6 +29,7 @@ public class Config  implements AsyncConfigurer {
         HikariDataSource dataSource = new HikariDataSource();
         return dataSource;
     }
+
     //退出
     @Bean
     public ExitCodeGenerator exitCodeGenerator(){

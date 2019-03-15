@@ -1,6 +1,7 @@
 package cn.njyazheng;
 
 import cn.njyazheng.excel.read.ExcelRead;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 
 @SpringBootApplication
+@MapperScan("cn.njyazheng.mapper")
 public class SpringBootApplicaton implements CommandLineRunner {
     @Autowired
     private ExcelRead excelRead;

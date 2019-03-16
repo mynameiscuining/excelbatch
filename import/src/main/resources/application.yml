@@ -29,8 +29,9 @@ subscrinfo:
     perview:
         dir: D:\\亚信\\天津电信\\
         file: SUBSCRIBERRENTINFO.xlsx
+        read: 1
     monthpack:
         dir: D:\\亚信\\天津电信\\
         file: SERORDERINFO.xlsx
-
+        read: 1
 

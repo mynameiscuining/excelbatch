@@ -66,7 +66,7 @@ public class SubscribeinfolService {
                 subscribeInfo.setFee(objects.get(16)==null?null: Integer.parseInt(objects.get(16).toString().trim()));//FEE index=16
                 subscribeInfo.setRealfee(objects.get(16)==null?null:Integer.parseInt(objects.get(16).toString().trim()));//FEE index=16
                 subscribeInfo.setPaytype(1);//支付方式
-                addBatch(subscribeInfo,perview,countDownLatch);
+                addAsync(subscribeInfo,perview,countDownLatch);
             }catch (Exception e){
                 LOGGER.error("-------------------------file:"+perview+"------------------------------");
                 LOGGER.error(list.toString());
@@ -77,7 +77,7 @@ public class SubscribeinfolService {
         list.clear();
     }
     @Async
-    public void addBatch(SubscribeInfo subscribeInfo,String file,CountDownLatch countDownLatch){
+    public void addAsync(SubscribeInfo subscribeInfo,String file,CountDownLatch countDownLatch){
         try {
             subscribeInfoMapper.insertSelective(subscribeInfo);
         }catch (Exception e){
@@ -131,7 +131,7 @@ public class SubscribeinfolService {
                 subscribeInfo.setRealfee(objects.get(21)==null?null:Integer.parseInt(objects.get(21).toString().trim()));//FEE index=21
                 subscribeInfo.setPaytype(1);//支付方式
                 subscribeInfo.setTable(Tools.getUserHashTable(Tools.I_SUBSCRIBEINFO,objects.get(1)==null?null:objects.get(1).toString().trim()));
-                addBatch(subscribeInfo,perview,countDownLatch);
+                addAsync(subscribeInfo,perview,countDownLatch);
             }catch (Exception e){
                 LOGGER.error("-------------------------file:"+monthpack+"------------------------------");
                 LOGGER.error(list.toString());

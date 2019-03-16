@@ -3,6 +3,7 @@ package cn.njyazheng.excel.subscribeinfo;
 import cn.njyazheng.annotation.Subscribeinfo;
 import cn.njyazheng.excel.ExcelReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,9 +13,18 @@ public class ExcelSubscribeInfoReader implements ExcelReaderService {
     private ExcelSubscribleinfoPerviewReader perviewReader;
     @Autowired
     private ExcelSubscribleinfoMonthPackReader monthPackReader;
+
+    @Value("${subscrinfo.monthpack.read:1}")
+    private int monthpack;
+    @Value("${subscrinfo.perview.read:1}")
+    private int perview;
     @Override
     public void handleExcel() throws Exception {
-        perviewReader.handleExcel();
-        monthPackReader.handleExcel();
+        if(perview==1){
+            perviewReader.handleExcel();
+        }
+        if(monthpack==1){
+            monthPackReader.handleExcel();
+        }
     }
 }

@@ -36,16 +36,16 @@ public class Config  implements AsyncConfigurer {
         return  ()->42;
     }
 
-    //线程池
-    @Override
-    public Executor getAsyncExecutor() {
-        ThreadPoolTaskExecutor threadPoolExecutor=new ThreadPoolTaskExecutor();
-        threadPoolExecutor.setCorePoolSize(5);
-        threadPoolExecutor.setMaxPoolSize(10);
-        threadPoolExecutor.setQueueCapacity(25);
-        threadPoolExecutor.initialize();
-        return threadPoolExecutor;
-    }
+//    //线程池
+//    @Override
+//    public Executor getAsyncExecutor() {
+//        ThreadPoolTaskExecutor threadPoolExecutor=new ThreadPoolTaskExecutor();
+//        threadPoolExecutor.setCorePoolSize(5);
+//        threadPoolExecutor.setMaxPoolSize(5);
+//        threadPoolExecutor.setQueueCapacity(25);
+//        threadPoolExecutor.initialize();
+//        return threadPoolExecutor;
+//    }
 
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {

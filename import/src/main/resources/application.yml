@@ -1,0 +1,36 @@
+server:
+    port : 8089
+logging:
+    config: classpath:logback.xml
+spring:
+    profiles:
+        active: subscribeinfo
+    datasource:
+        hikari:
+            jdbc-url: jdbc:mysql://192.168.229.129:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+            username: yazheng
+            password: yazheng123
+            driver-class-name: com.mysql.jdbc.Driver
+            minimum-idle: 5
+            idle-timeout: 180000
+            maximum-pool-size: 100
+            max-lifetime: 1800000
+            auto-commit: true
+            connection-timeout: 30000
+            connection-test-query: SELECT 1
+mybatis:
+    mapper-locations: classpath:mapping/**Mapper.xml
+
+read:
+   fist-line: 1
+import:
+   once-size: 1000
+subscrinfo:
+    perview:
+        dir: D:\\亚信\\天津电信\\
+        file: SUBSCRIBERRENTINFO.xlsx
+    monthpack:
+        dir: D:\\亚信\\天津电信\\
+        file: SERORDERINFO.xlsx
+
+

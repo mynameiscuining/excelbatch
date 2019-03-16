@@ -21,10 +21,10 @@ public class ExcelSubscribeInfoReader implements ExcelReaderService {
     @Override
     public void handleExcel() throws Exception {
         if(perview==1){
-            perviewReader.handleExcel();
+            perviewReader.setExcel();
         }
         if(monthpack==1){
-            monthPackReader.handleExcel();
+            monthPackReader.setExcel();
         }
     }
 }

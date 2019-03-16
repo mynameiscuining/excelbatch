@@ -263,4 +263,36 @@ public class SubscribeInfo {
     public void setTable(String table) {
         this.table = table;
     }
+
+    @Override
+    public String toString() {
+        return "SubscribeInfo{" +
+                "table='" + table + '\'' +
+                ", subscriptionid='" + subscriptionid + '\'' +
+                ", spid='" + spid + '\'' +
+                ", orderid='" + orderid + '\'' +
+                ", orderflag=" + orderflag +
+                ", itemid='" + itemid + '\'' +
+                ", oa='" + oa + '\'' +
+                ", oauserflag=" + oauserflag +
+                ", da='" + da + '\'' +
+                ", dauserflag=" + dauserflag +
+                ", fa='" + fa + '\'' +
+                ", fatype=" + fatype +
+                ", originid='" + originid + '\'' +
+                ", status=" + status +
+                ", subscribetime=" + subscribetime +
+                ", effectivetime=" + effectivetime +
+                ", expiretime=" + expiretime +
+                ", suspendreason='" + suspendreason + '\'' +
+                ", suspendtime=" + suspendtime +
+                ", resumetime=" + resumetime +
+                ", withdrawreason='" + withdrawreason + '\'' +
+                ", withdrawtime=" + withdrawtime +
+                ", issubscription=" + issubscription +
+                ", fee=" + fee +
+                ", realfee=" + realfee +
+                ", paytype=" + paytype +
+                '}';
+    }
 }

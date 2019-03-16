@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 
 @Service
@@ -28,6 +30,7 @@ public class SubscribeinfolService {
     private SubscribeIDGen subidGen;
 
     public void addPerViewBatch(List<List> list) {
+        CountDownLatch countDownLatch=new CountDownLatch(list.size());
         list.parallelStream().forEach(objects->{
             try {
                 //临时订购关系
@@ -63,17 +66,31 @@ public class SubscribeinfolService {
                 subscribeInfo.setFee(objects.get(16)==null?null: Integer.parseInt(objects.get(16).toString().trim()));//FEE index=16
                 subscribeInfo.setRealfee(objects.get(16)==null?null:Integer.parseInt(objects.get(16).toString().trim()));//FEE index=16
                 subscribeInfo.setPaytype(1);//支付方式
-                subscribeInfoMapper.insertSelective(subscribeInfo);
+                addBatch(subscribeInfo,perview,countDownLatch);
             }catch (Exception e){
                 LOGGER.error("-------------------------file:"+perview+"------------------------------");
                 LOGGER.error(list.toString());
-                LOGGER.error("failed!",e);
+                LOGGER.error("excel date convert to entity failed!",e);
             }
         });
+        wait(countDownLatch);
         list.clear();
     }
+    @Async
+    public void addBatch(SubscribeInfo subscribeInfo,String file,CountDownLatch countDownLatch){
+        try {
+            subscribeInfoMapper.insertSelective(subscribeInfo);
+        }catch (Exception e){
+            LOGGER.error("-------------------------file:"+file+"------------------------------");
+            LOGGER.error(subscribeInfo.toString());
+            LOGGER.error("import failed!",e);
+        }finally {
+            countDownLatch.countDown();
+        }
 
+    }
     public void addMonthPackBatch(List<List> list) {
+        CountDownLatch countDownLatch=new CountDownLatch(list.size());
         list.parallelStream().forEach(objects->{
             try {
                 //订购关系
@@ -114,13 +131,23 @@ public class SubscribeinfolService {
                 subscribeInfo.setRealfee(objects.get(21)==null?null:Integer.parseInt(objects.get(21).toString().trim()));//FEE index=21
                 subscribeInfo.setPaytype(1);//支付方式
                 subscribeInfo.setTable(Tools.getUserHashTable(Tools.I_SUBSCRIBEINFO,objects.get(1)==null?null:objects.get(1).toString().trim()));
-               subscribeInfoMapper.insertSelective(subscribeInfo);
+                addBatch(subscribeInfo,perview,countDownLatch);
             }catch (Exception e){
                 LOGGER.error("-------------------------file:"+monthpack+"------------------------------");
                 LOGGER.error(list.toString());
-                LOGGER.error("import failed!",e);
+                LOGGER.error("excel date convert to entity failed!",e);
             }
         });
+        wait(countDownLatch);
         list.clear();
+    }
+
+    private void wait( CountDownLatch countDownLatch) {
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            LOGGER.error("-------------------------file:"+monthpack+"------------------------------");
+            LOGGER.error("InterruptedException",e);
+        }
     }
 }

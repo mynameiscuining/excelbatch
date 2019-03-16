@@ -24,7 +24,7 @@ mybatis:
 read:
    fist-line: 1
 import:
-   once-size: 1000
+   once-size: 100
 subscrinfo:
     perview:
         dir: D:\\亚信\\天津电信\\

@@ -45,7 +45,7 @@ public class AsyncSubscribeinfoService {
                  renew.setLoginaccount(subscribeInfo.getDa());
                  renew.setFee(subscribeInfo.getFee());
                  renew.setRealfee(subscribeInfo.getRealfee());
-                 renew.setTable(Tools.getMonthDayTable(Tools.I_RENEW,new Date()));
+                 renew.setTable(Tools.getMonthDayTable(Tools.I_RENEW,Tools.getNextMontnFirstDay(new Date())));
                  renewService.addRenew(renew,file);
              }
         }catch (Exception e){

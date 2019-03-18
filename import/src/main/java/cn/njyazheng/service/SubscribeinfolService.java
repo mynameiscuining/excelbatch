@@ -21,7 +21,7 @@ import java.util.concurrent.CountDownLatch;
 public class SubscribeinfolService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubscribeinfolService.class);
     @Autowired
-    private SubscribeInfoMapper subscribeInfoMapper;
+    private AsyncSubscribeinfoService asyncSubscribeinfoService;
     @Value("${subscrinfo.perview.file}")
     private String perview;
     @Value("${subscrinfo.monthpack.file}")
@@ -29,19 +29,6 @@ public class SubscribeinfolService {
     @Autowired
     private SubscribeIDGen subidGen;
 
-    @Async
-    public void addAsync(SubscribeInfo subscribeInfo,String file,CountDownLatch countDownLatch){
-        try {
-           // subscribeInfoMapper.insertSelective(subscribeInfo);
-        }catch (Exception e){
-            LOGGER.error("-------------------------file:"+file+"------------------------------");
-            LOGGER.error(subscribeInfo.toString());
-            LOGGER.error("import failed!",e);
-        }finally {
-            countDownLatch.countDown();
-        }
-
-    }
 
     private SubscribeInfo getSubscribeMonthPackInfo(List objects) {
         //订购关系
@@ -100,7 +87,7 @@ public class SubscribeinfolService {
         list.parallelStream().forEach(objects->{
             try {
                 SubscribeInfo subscribeInfo =1==flag?getSubscribeMonthPackInfo(objects):getSubscribePerviewInfo(objects);
-                addAsync(subscribeInfo,file,countDownLatch);
+                asyncSubscribeinfoService.addAsync(subscribeInfo,file,countDownLatch);
             }catch (Exception e){
                 LOGGER.error("-------------------------file:"+file+"------------------------------");
                 LOGGER.error(list.toString());

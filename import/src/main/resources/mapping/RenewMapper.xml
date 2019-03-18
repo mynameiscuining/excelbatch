@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.njyazheng.mapper.RenewMapper">
+  <resultMap id="BaseResultMap" type="cn.njyazheng.domain.Renew">
+    <id column="serno" jdbcType="INTEGER" property="serno" />
+    <result column="subscriptionID" jdbcType="VARCHAR" property="subscriptionid" />
+    <result column="loginaccount" jdbcType="VARCHAR" property="loginaccount" />
+    <result column="productid" jdbcType="VARCHAR" property="productid" />
+    <result column="campaignid" jdbcType="INTEGER" property="campaignid" />
+    <result column="strategyid" jdbcType="INTEGER" property="strategyid" />
+    <result column="ruleid" jdbcType="INTEGER" property="ruleid" />
+    <result column="param" jdbcType="VARCHAR" property="param" />
+    <result column="firstsubscribetime" jdbcType="TIMESTAMP" property="firstsubscribetime" />
+    <result column="lastsubscribetime" jdbcType="TIMESTAMP" property="lastsubscribetime" />
+    <result column="renewtimes" jdbcType="INTEGER" property="renewtimes" />
+    <result column="renewtype" jdbcType="INTEGER" property="renewtype" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="fee" jdbcType="INTEGER" property="fee" />
+    <result column="realfee" jdbcType="INTEGER" property="realfee" />
+    <result column="paytype" jdbcType="INTEGER" property="paytype" />
+    <result column="processstatus" jdbcType="INTEGER" property="processstatus" />
+    <result column="moddate" jdbcType="TIMESTAMP" property="moddate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    serno, subscriptionID, loginaccount, productid, campaignid, strategyid, ruleid, param, 
+    firstsubscribetime, lastsubscribetime, renewtimes, renewtype, period, fee, realfee, 
+    paytype, processstatus, moddate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from I_RENEW
+    where serno = #{serno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from I_RENEW
+    where serno = #{serno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.njyazheng.domain.Renew">
+    insert into I_RENEW (serno, subscriptionID, loginaccount, 
+      productid, campaignid, strategyid, 
+      ruleid, param, firstsubscribetime, 
+      lastsubscribetime, renewtimes, renewtype, 
+      period, fee, realfee, 
+      paytype, processstatus, moddate
+      )
+    values (#{serno,jdbcType=INTEGER}, #{subscriptionid,jdbcType=VARCHAR}, #{loginaccount,jdbcType=VARCHAR}, 
+      #{productid,jdbcType=VARCHAR}, #{campaignid,jdbcType=INTEGER}, #{strategyid,jdbcType=INTEGER}, 
+      #{ruleid,jdbcType=INTEGER}, #{param,jdbcType=VARCHAR}, #{firstsubscribetime,jdbcType=TIMESTAMP}, 
+      #{lastsubscribetime,jdbcType=TIMESTAMP}, #{renewtimes,jdbcType=INTEGER}, #{renewtype,jdbcType=INTEGER}, 
+      #{period,jdbcType=INTEGER}, #{fee,jdbcType=INTEGER}, #{realfee,jdbcType=INTEGER}, 
+      #{paytype,jdbcType=INTEGER}, #{processstatus,jdbcType=INTEGER}, #{moddate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.njyazheng.domain.Renew">
+    insert into ${table}
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subscriptionid != null">
+        subscriptionID,
+      </if>
+      <if test="loginaccount != null">
+        loginaccount,
+      </if>
+      <if test="productid != null">
+        productid,
+      </if>
+      <if test="campaignid != null">
+        campaignid,
+      </if>
+      <if test="strategyid != null">
+        strategyid,
+      </if>
+      <if test="ruleid != null">
+        ruleid,
+      </if>
+      <if test="param != null">
+        param,
+      </if>
+      <if test="firstsubscribetime != null">
+        firstsubscribetime,
+      </if>
+      <if test="lastsubscribetime != null">
+        lastsubscribetime,
+      </if>
+      <if test="renewtimes != null">
+        renewtimes,
+      </if>
+      <if test="renewtype != null">
+        renewtype,
+      </if>
+      <if test="period != null">
+        period,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="realfee != null">
+        realfee,
+      </if>
+      <if test="paytype != null">
+        paytype,
+      </if>
+      <if test="processstatus != null">
+        processstatus,
+      </if>
+      <if test="moddate != null">
+        moddate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serno != null">
+        #{serno,jdbcType=INTEGER},
+      </if>
+      <if test="subscriptionid != null">
+        #{subscriptionid,jdbcType=VARCHAR},
+      </if>
+      <if test="loginaccount != null">
+        #{loginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="campaignid != null">
+        #{campaignid,jdbcType=INTEGER},
+      </if>
+      <if test="strategyid != null">
+        #{strategyid,jdbcType=INTEGER},
+      </if>
+      <if test="ruleid != null">
+        #{ruleid,jdbcType=INTEGER},
+      </if>
+      <if test="param != null">
+        #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="firstsubscribetime != null">
+        #{firstsubscribetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastsubscribetime != null">
+        #{lastsubscribetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="renewtimes != null">
+        #{renewtimes,jdbcType=INTEGER},
+      </if>
+      <if test="renewtype != null">
+        #{renewtype,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="realfee != null">
+        #{realfee,jdbcType=INTEGER},
+      </if>
+      <if test="paytype != null">
+        #{paytype,jdbcType=INTEGER},
+      </if>
+      <if test="processstatus != null">
+        #{processstatus,jdbcType=INTEGER},
+      </if>
+      <if test="moddate != null">
+        #{moddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.njyazheng.domain.Renew">
+    update I_RENEW
+    <set>
+      <if test="subscriptionid != null">
+        subscriptionID = #{subscriptionid,jdbcType=VARCHAR},
+      </if>
+      <if test="loginaccount != null">
+        loginaccount = #{loginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null">
+        productid = #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="campaignid != null">
+        campaignid = #{campaignid,jdbcType=INTEGER},
+      </if>
+      <if test="strategyid != null">
+        strategyid = #{strategyid,jdbcType=INTEGER},
+      </if>
+      <if test="ruleid != null">
+        ruleid = #{ruleid,jdbcType=INTEGER},
+      </if>
+      <if test="param != null">
+        param = #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="firstsubscribetime != null">
+        firstsubscribetime = #{firstsubscribetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastsubscribetime != null">
+        lastsubscribetime = #{lastsubscribetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="renewtimes != null">
+        renewtimes = #{renewtimes,jdbcType=INTEGER},
+      </if>
+      <if test="renewtype != null">
+        renewtype = #{renewtype,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="realfee != null">
+        realfee = #{realfee,jdbcType=INTEGER},
+      </if>
+      <if test="paytype != null">
+        paytype = #{paytype,jdbcType=INTEGER},
+      </if>
+      <if test="processstatus != null">
+        processstatus = #{processstatus,jdbcType=INTEGER},
+      </if>
+      <if test="moddate != null">
+        moddate = #{moddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where serno = #{serno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.njyazheng.domain.Renew">
+    update I_RENEW
+    set subscriptionID = #{subscriptionid,jdbcType=VARCHAR},
+      loginaccount = #{loginaccount,jdbcType=VARCHAR},
+      productid = #{productid,jdbcType=VARCHAR},
+      campaignid = #{campaignid,jdbcType=INTEGER},
+      strategyid = #{strategyid,jdbcType=INTEGER},
+      ruleid = #{ruleid,jdbcType=INTEGER},
+      param = #{param,jdbcType=VARCHAR},
+      firstsubscribetime = #{firstsubscribetime,jdbcType=TIMESTAMP},
+      lastsubscribetime = #{lastsubscribetime,jdbcType=TIMESTAMP},
+      renewtimes = #{renewtimes,jdbcType=INTEGER},
+      renewtype = #{renewtype,jdbcType=INTEGER},
+      period = #{period,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=INTEGER},
+      realfee = #{realfee,jdbcType=INTEGER},
+      paytype = #{paytype,jdbcType=INTEGER},
+      processstatus = #{processstatus,jdbcType=INTEGER},
+      moddate = #{moddate,jdbcType=TIMESTAMP}
+    where serno = #{serno,jdbcType=INTEGER}
+  </update>
+</mapper>

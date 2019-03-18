@@ -1,15 +1,11 @@
 package cn.njyazheng.service;
-
-import cn.njyazheng.annotation.Subscribeinfo;
 import cn.njyazheng.domain.SubscribeInfo;
-import cn.njyazheng.mapper.SubscribeInfoMapper;
 import cn.njyazheng.util.SubscribeIDGen;
 import cn.njyazheng.util.Tools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -31,7 +27,7 @@ public class SubscribeinfolService {
 
 
     private SubscribeInfo getSubscribeMonthPackInfo(List objects) {
-        //订购关系
+        //订购关关系
         SubscribeInfo subscribeInfo=new SubscribeInfo();
         subscribeInfo.setSubscriptionid(subidGen.getSubscriptionID("0","1"));//订购编号
         subscribeInfo.setSpid(null);//
@@ -54,10 +50,6 @@ public class SubscribeinfolService {
             Date date= Tools.getDateByFORMAT(objects.get(4).toString().trim(),Tools.yyyyMMddHHmms);
             subscribeInfo.setEffectivetime(date);//生效时间SERSTARTTIME index=4
         }
-        if(objects.get(5)!=null&&!"".equals(objects.get(5).toString().trim())){
-            Date date= Tools.getDateByFORMAT(objects.get(5).toString().trim(),Tools.yyyyMMddHHmms);
-            subscribeInfo.setExpiretime(date);//失效时间 SERSTOPTIME index=5
-        }
         subscribeInfo.setResumetime(null);//暂停恢复时间
         subscribeInfo.setWithdrawreason(null);//退订原因
         if(objects.get(8)!=null&&!"".equals(objects.get(8).toString().trim())){
@@ -65,8 +57,15 @@ public class SubscribeinfolService {
             subscribeInfo.setWithdrawtime(date);//退订时间CANCELCONTINUETIME index=8
         }
         subscribeInfo.setIssubscription(objects.get(6)==null?null: Integer.parseInt(objects.get(6).toString().trim()));//是否续订CONTINUEFLAG index=6
-        subscribeInfo.setFee(objects.get(20)==null?null: Integer.parseInt(objects.get(20).toString().trim()));//PRODUCT_FEE index=20
-        subscribeInfo.setRealfee(objects.get(21)==null?null:Integer.parseInt(objects.get(21).toString().trim()));//FEE index=21
+        if(objects.get(5)!=null&&!"".equals(objects.get(5).toString().trim())){
+            Date date= Tools.getDateByFORMAT(objects.get(5).toString().trim(),Tools.yyyyMMddHHmms);
+            subscribeInfo.setExpiretime(date);//失效时间 SERSTOPTIME index=5
+            if("30000101000000".equals(objects.get(5).toString().trim())){
+                subscribeInfo.setIssubscription(1);
+            }
+        }
+        subscribeInfo.setFee(objects.get(21)==null?null: Integer.parseInt(objects.get(21).toString().trim()));//FEE index=20
+        subscribeInfo.setRealfee(null);
         subscribeInfo.setPaytype(1);//支付方式
         subscribeInfo.setTable(Tools.getUserHashTable(Tools.I_SUBSCRIBEINFO,objects.get(1)==null?null:objects.get(1).toString().trim()));
         return subscribeInfo;
@@ -84,10 +83,10 @@ public class SubscribeinfolService {
         //0按次 1就是包
         String file=1==flag?monthpack:perview;
         CountDownLatch countDownLatch=new CountDownLatch(list.size());
-        list.parallelStream().forEach(objects->{
+        list.stream().forEach(objects->{
             try {
                 SubscribeInfo subscribeInfo =1==flag?getSubscribeMonthPackInfo(objects):getSubscribePerviewInfo(objects);
-                asyncSubscribeinfoService.addAsync(subscribeInfo,file,countDownLatch);
+                asyncSubscribeinfoService.addAsync(subscribeInfo,file,countDownLatch,flag);
             }catch (Exception e){
                 LOGGER.error("-------------------------file:"+file+"------------------------------");
                 LOGGER.error(list.toString());
@@ -117,20 +116,23 @@ public class SubscribeinfolService {
         subscribeInfo.setStatus(0);//0代表正常
         if(objects.get(7)!=null&&!"".equals(objects.get(7).toString().trim())){
             Date date= Tools.getDateByFORMAT(objects.get(7).toString().trim(),Tools.yyyyMMddHHmms);
-            subscribeInfo.setSubscribetime(date);//订购时间STARTTIME index=7
+            subscribeInfo.setEffectivetime(date);//生效时间STARTTIME index=7
+        }
+        if(objects.get(24)!=null&&!"".equals(objects.get(24).toString().trim())){
+            Date date= Tools.getDateByFORMAT(objects.get(24).toString().trim(),Tools.yyyyMMddHHmms);
+            subscribeInfo.setSubscribetime(date);//订购时间ORDERTIME index=24
             subscribeInfo.setEffectivetime(date);//生效时间STARTTIME index=7
         }
         if(objects.get(8)!=null&&!"".equals(objects.get(8).toString().trim())){
             Date date= Tools.getDateByFORMAT(objects.get(8).toString().trim(),Tools.yyyyMMddHHmms);
             subscribeInfo.setExpiretime(date);//失效时间 ENDTIME index=8
         }
-        subscribeInfo.setExpiretime(null);//失效时间 ENDTIME index=8
         subscribeInfo.setResumetime(null);//暂停恢复时间
         subscribeInfo.setWithdrawreason(null);//退订时间
         subscribeInfo.setWithdrawtime(null);//退订时间
         subscribeInfo.setIssubscription(null);//是否续订
         subscribeInfo.setFee(objects.get(16)==null?null: Integer.parseInt(objects.get(16).toString().trim()));//FEE index=16
-        subscribeInfo.setRealfee(objects.get(16)==null?null:Integer.parseInt(objects.get(16).toString().trim()));//FEE index=16
+        subscribeInfo.setRealfee(null);
         subscribeInfo.setPaytype(1);//支付方式
         return subscribeInfo;
     }

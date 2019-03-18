@@ -11,7 +11,7 @@ spring:
             username: yazheng
             password: yazheng123
             driver-class-name: com.mysql.jdbc.Driver
-            minimum-idle: 5
+            minimum-idle: 12
             idle-timeout: 180000
             maximum-pool-size: 100
             max-lifetime: 1800000

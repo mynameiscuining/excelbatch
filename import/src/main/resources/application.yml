@@ -7,9 +7,9 @@ spring:
         active: subscribeinfo
     datasource:
         hikari:
-            jdbc-url: jdbc:mysql://192.168.229.129:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
-            username: yazheng
-            password: yazheng123
+            jdbc-url: jdbc:mysql://10.1.198.86:23306/TJCTDEV?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+            username: tjctdev
+            password: Tjctdev123.
             driver-class-name: com.mysql.jdbc.Driver
             minimum-idle: 12
             idle-timeout: 180000
@@ -24,14 +24,14 @@ mybatis:
 read:
    fist-line: 1
 import:
-   once-size: 100
+   once-size: 200
 subscrinfo:
     perview:
-        dir: D:\\亚信\\天津电信\\
+        dir: D:\\亚信\\天津电信\\test\\
         file: SUBSCRIBERRENTINFO.xlsx
         read: 1
     monthpack:
-        dir: D:\\亚信\\天津电信\\
+        dir: D:\\亚信\\天津电信\\test\\
         file: SERORDERINFO.xlsx
         read: 1
 

@@ -2,7 +2,6 @@ package cn.njyazheng.service;
 
 import cn.njyazheng.domain.Renew;
 import cn.njyazheng.domain.SubscribeInfo;
-import cn.njyazheng.mapper.RenewMapper;
 import cn.njyazheng.mapper.SubscribeInfoMapper;
 import cn.njyazheng.util.Tools;
 import org.slf4j.Logger;
@@ -46,6 +45,7 @@ public class AsyncSubscribeinfoService {
                  renew.setFee(subscribeInfo.getFee());
                  renew.setRealfee(subscribeInfo.getRealfee());
                  renew.setTable(Tools.getMonthDayTable(Tools.I_RENEW,Tools.getNextMontnFirstDay(new Date())));
+                 renew.setTable(Tools.getMonthDayTable(Tools.I_RENEW,new Date()));
                  renewService.addRenew(renew,file);
              }
         }catch (Exception e){

@@ -19,7 +19,7 @@ public class AsyncConfig implements AsyncConfigurer {
         //配置最大线程数
         threadPoolExecutor.setMaxPoolSize(50);
         //配置队列大小
-        threadPoolExecutor.setQueueCapacity(400);
+        threadPoolExecutor.setQueueCapacity(300);
         //配置线程池中的线程的名称前缀
         threadPoolExecutor.setWaitForTasksToCompleteOnShutdown(true);//等待任务在关机时完成--表明等待所有线程执行完
         threadPoolExecutor.setThreadNamePrefix("thread-");

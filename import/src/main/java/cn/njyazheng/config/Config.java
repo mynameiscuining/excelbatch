@@ -18,19 +18,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 public class Config   {
-    /**
-     * 数据源配置
-     *
-     * @param
-     * @return
-     */
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.hikari")
-    public DataSource dataSource() {
-        HikariDataSource dataSource = new HikariDataSource();
-        return dataSource;
-    }
-
     //退出
     @Bean
     public ExitCodeGenerator exitCodeGenerator(){

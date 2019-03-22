@@ -6,25 +6,15 @@ spring:
     profiles:
         active: subscribeinfo
     datasource:
-        hikari:
-            jdbc-url: jdbc:mysql://10.1.198.86:23306/TJCTDEV?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
-            username: tjctdev
-            password: Tjctdev123.
-            driver-class-name: com.mysql.jdbc.Driver
-            minimum-idle: 12
-            idle-timeout: 180000
-            maximum-pool-size: 100
-            max-lifetime: 1800000
-            auto-commit: true
-            connection-timeout: 30000
-            connection-test-query: SELECT 1
-mybatis:
-    mapper-locations: classpath:mapping/**Mapper.xml
+      url: jdbc:mysql://192.168.229.129:3306/test?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&serverTimezone=UTC&useSSL=false
+      username: yazheng
+      password: yazheng123
+      driver-class-name: com.mysql.jdbc.Driver
 
 read:
    fist-line: 1
 import:
-   once-size: 200
+   once-size: 2000
 subscrinfo:
     perview:
         dir: D:\\亚信\\天津电信\\test\\

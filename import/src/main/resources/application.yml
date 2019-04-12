@@ -6,15 +6,15 @@ spring:
     profiles:
         active: subscribeinfo
     datasource:
-      url: jdbc:mysql://192.168.229.129:3306/test?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&serverTimezone=UTC&useSSL=false
-      username: yazheng
-      password: yazheng123
+      url: jdbc:mysql://10.1.198.86:23306/TJCTDEV?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&serverTimezone=UTC&useSSL=false
+      username: tjctdev
+      password: Tjctdev123.
       driver-class-name: com.mysql.jdbc.Driver
-
+#11111111111111111
 read:
    fist-line: 1
 import:
-   once-size: 2000
+   once-size: 3000
 subscrinfo:
     perview:
         dir: D:\\亚信\\天津电信\\test\\

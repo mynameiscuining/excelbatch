@@ -6,9 +6,9 @@ spring:
     profiles:
         active: subscribeinfo
     datasource:
-      url: jdbc:mysql://192.168.229.129:3306/test?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&serverTimezone=UTC&useSSL=false
-      username: yazheng
-      password: yazheng123
+      url: jdbc:mysql://xxx:3306/test?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&serverTimezone=UTC&useSSL=false
+      username: xxx
+      password: xxx
       driver-class-name: com.mysql.jdbc.Driver
 
 read:

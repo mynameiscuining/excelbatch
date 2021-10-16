@@ -1,6 +1,6 @@
 package cn.njyazheng.util;
 
-import com.google.common.base.Strings;
+
 
 public class StringUtil {
 
@@ -26,7 +26,8 @@ public class StringUtil {
      * @return len 长度的字符串
      */
     public static String fixLenth(String src,int len,char padchar) {
-        String fullStr=Strings.padStart(src, len, padchar);
-        return fullStr.substring(fullStr.length()-len);
+//        String fullStr=Strings.padStart(src, len, padchar);
+//        return fullStr.substring(fullStr.length()-len);
+          return  null;
     }
 }

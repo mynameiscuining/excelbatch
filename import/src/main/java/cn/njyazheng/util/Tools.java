@@ -56,4 +56,15 @@ public class Tools {
         LocalDateTime localDateTime =date.toInstant().atZone(ZONE).toLocalDateTime();
         return  localDateTime.format(dateTimeFormatter);
     }
+
+    public static String leftComplement(int length, String source, String need) {
+        int l = source.length();
+        if (l < length) {
+            for (int i = 0; i < (length - l); i++) {
+                source = need + source;
+            }
+        }
+        return source;
+    }
+
 }
